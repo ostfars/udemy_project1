@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const newFilm = addInput.value;
     const favorite = checkbox.checked;
+
+    movieDB.movies.push(newFilm);
+    movieDB.movies.sort();
   });
         
   adv.forEach(item => {
