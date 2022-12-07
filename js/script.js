@@ -14,48 +14,59 @@ P.S. Здесь есть несколько вариантов решения з
 "Добавляем любимый фильм"
 
 5) Фильмы должны быть отсортированы по алфавиту */
+
 'use strict';
 
-const movieDB = {
+document.addEventListener('DOMContentLoaded', () => {
+  const movieDB = {
     movies: [
-        "Логан",
-        "Лига справедливости",
-        "Ла-ла лэнд",
-        "Одержимость",
-        "Скотт Пилигрим против..."
-    ]
-};
+      "Логан",
+      "Лига справедливости",
+      "Ла-ла лэнд",
+      "Одержимость",
+      "Скотт Пилигрим против..."
+      ]
+  };
 
-const adv = document.querySelectorAll('.promo__adv img'),
-      poster = document.querySelector('.promo__bg'),
-      genre = poster.querySelector('.promo__genre'),
-      movieList = document.querySelector('.promo__interactive-list');
-      
-adv.forEach(item => {
-  item.remove();
-});
-// так тоже можно через анонимную функцию, но лучше так не делать:
-// adv.forEach(function (item) {
-//   item.remove()
-// })
+  const adv = document.querySelectorAll('.promo__adv img'),
+        poster = document.querySelector('.promo__bg'),
+        genre = poster.querySelector('.promo__genre'),
+        movieList = document.querySelector('.promo__interactive-list'),
+        addForm = document.querySelector('form.add'),
+        addInput = addForm.querySelector('.adding__input'),
+        checkbox = addForm.querySelector('[type="checkbox"]');
 
-genre.textContent = 'драма'
+  addForm.addEventListener('submit', (event) => {
+    event.preventDefault();
 
-poster.style.backgroundImage = 'url("img/bg.jpg")'
+    const newFilm = addInput.value;
+    const favorite = checkbox.checked;
+  });
+        
+  adv.forEach(item => {
+    item.remove();
+  });
+  // так тоже можно через анонимную функцию, но лучше так не делать:
+  // adv.forEach(function (item) {
+  //   item.remove()
+  // })
 
-movieList.innerHTML = ''
+  genre.textContent = 'драма'
 
-movieDB.movies.sort();
+  poster.style.backgroundImage = 'url("img/bg.jpg")'
 
-movieDB.movies.forEach((film, i) => {
-  movieList.innerHTML += `
-    <li class="promo__interactive-item">${i + 1} ${film}
-      <div class="delete"></div>
-    </li>  
+  movieList.innerHTML = ''
 
-  `;
+  movieDB.movies.sort();
+
+  movieDB.movies.forEach((film, i) => {
+    movieList.innerHTML += `
+      <li class="promo__interactive-item">${i + 1} ${film}
+        <div class="delete"></div>
+      </li>  
+
+    `;
+  })
+
+
 })
-const addMovie = document.querySelector('.promo__interactive .add input');
-const confirmButton = document.querySelector('.promo__interactive .add button')
-confirmButton.onClick
-console.log(addMovie.value);
