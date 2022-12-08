@@ -46,30 +46,45 @@ document.addEventListener('DOMContentLoaded', () => {
     movieDB.movies.sort();
   });
         
-  adv.forEach(item => {
-    item.remove();
-  });
-  // так тоже можно через анонимную функцию, но лучше так не делать:
+  const deleteAdv = (arr) => {
+    arr.forEach(item => {
+      item.remove();
+    });
+  };
+
+  deleteAdv(adv);
+  
+    // так тоже можно через анонимную функцию, но лучше так не делать:
   // adv.forEach(function (item) {
   //   item.remove()
   // })
 
-  genre.textContent = 'драма'
+  const makeChanges = () => {
+    genre.textContent = 'драма'
+    poster.style.backgroundImage = 'url("img/bg.jpg")'
+  };
 
-  poster.style.backgroundImage = 'url("img/bg.jpg")'
+  makeChanges()
 
-  movieList.innerHTML = ''
+  const sortArray = (arr) => {
+    arr.sort();
+  };
 
-  movieDB.movies.sort();
+  sortArray(movieDB);
 
-  movieDB.movies.forEach((film, i) => {
-    movieList.innerHTML += `
-      <li class="promo__interactive-item">${i + 1} ${film}
-        <div class="delete"></div>
-      </li>  
+  function createMovieList(films, parent) {
+    parent.innerHTML = ''
 
-    `;
-  })
+    films.forEach((film, i) => {
+      parent.innerHTML += `
+        <li class="promo__interactive-item">${i + 1} ${film}
+          <div class="delete"></div>
+        </li>  
+  
+      `;
+    })
+  }
 
+  createMovieList(movieDB.movies, movieList)
 
 })
